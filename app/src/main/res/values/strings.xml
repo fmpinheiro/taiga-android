@@ -10,4 +10,9 @@
     <string name="change_taiga_url">Change Taiga URL:</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="application_unavailable">Application unavailable</string>
+    <string name="invalid_credentials">Invalid credentials</string>
+    <string name="title_activity_projects">ProjectsActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

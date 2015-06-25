@@ -5,7 +5,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.devmonsters.taigamobile.login.LoginActivity">
+    tools:context="com.devmonsters.taigamobile.activities.login.LoginActivity">
 
     <ImageView
         android:id="@+id/logo"

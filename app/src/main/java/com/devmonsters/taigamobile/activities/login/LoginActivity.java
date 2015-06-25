@@ -1,11 +1,10 @@
-package com.devmonsters.taigamobile.login;
+package com.devmonsters.taigamobile.activities.login;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.devmonsters.taigamobile.R;
+import com.devmonsters.taigamobile.classes.login.SignInStatus;
+import com.devmonsters.taigamobile.service.LoginService;
 
 public class LoginActivity extends Activity {
 
@@ -76,11 +77,17 @@ public class LoginActivity extends Activity {
     }
 
     public void doSignIn(View view) {
-        Context context = getApplicationContext();
-        CharSequence text = "Hello toast!";
-        int duration = Toast.LENGTH_SHORT;
+        String username = ((EditText) findViewById(R.id.username_or_email)).getText().toString();
+        String password = ((EditText) findViewById(R.id.password)).getText().toString();
 
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+        SignInStatus signInStatus = new LoginService(taigaUrl).doLogin(username, password);
+
+        if (signInStatus != SignInStatus.OK) {
+            Toast.makeText(getApplicationContext(), getString(signInStatus.getToastMessage()), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Intent intent = new Intent(this, ProjectsActivity.class);
+        startActivity(intent);
     }
 }
