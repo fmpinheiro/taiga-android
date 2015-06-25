@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Taiga Mobile</string>
+    <string name="title_activity_login">Taiga Mobile</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="login">Login</string>
+    <string name="username_or_email">Username or e-mail</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="change_taiga_url">Change Taiga URL:</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+</resources>
