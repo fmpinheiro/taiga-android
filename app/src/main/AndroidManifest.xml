@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.login.ProjectsActivity"
+            android:name=".activities.projects.ProjectsActivity"
             android:label="@string/title_activity_projects" >
         </activity>
     </application>

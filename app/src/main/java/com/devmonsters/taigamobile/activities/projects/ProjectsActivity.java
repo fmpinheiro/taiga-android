@@ -1,4 +1,4 @@
-package com.devmonsters.taigamobile.activities.login;
+package com.devmonsters.taigamobile.activities.projects;
 
 import android.app.Activity;
 import android.os.Bundle;
