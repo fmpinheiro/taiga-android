@@ -3,6 +3,7 @@ package com.devmonsters.taigamobile.service;
 import android.os.AsyncTask;
 
 import com.devmonsters.taigamobile.classes.login.SignInStatus;
+import com.devmonsters.taigamobile.classes.response.AuthResponse;
 import com.devmonsters.taigamobile.endpoints.AuthEndpoint;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,13 +23,12 @@ public class LoginService {
             return SignInStatus.INVALID_CREDENTIALS;
         }
         try {
-            AuthEndpoint authEndpoint = new AuthEndpoint();
-            authEndpoint.execute(taigaUrl, username, password);
-            if (authEndpoint.get()) {
+            AuthEndpoint authEndpoint = new AuthEndpoint(taigaUrl, username, password);
+            authEndpoint.execute();
+
+            AuthResponse authResponse = authEndpoint.get();
+            if (authResponse != null) {
                 return SignInStatus.OK;
-            }
-            if (authEndpoint.isThrownAnError()) {
-                return SignInStatus.UNAVAILABLE;
             }
             return SignInStatus.INVALID_CREDENTIALS;
         } catch (Exception e) {
