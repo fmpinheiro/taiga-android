@@ -21,7 +21,7 @@ public class LoginActivity extends Activity {
 
     private static final String TAG = LoginActivity.class.getName();
 
-    private String taigaUrl = "http://taiga.io/";
+    private String taigaUrl = "https://api.taiga.io";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
