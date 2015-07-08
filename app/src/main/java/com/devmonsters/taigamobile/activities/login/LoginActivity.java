@@ -2,6 +2,7 @@ package com.devmonsters.taigamobile.activities.login;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -78,17 +79,34 @@ public class LoginActivity extends Activity {
     }
 
     public void doSignIn(View view) {
-        String username = ((EditText) findViewById(R.id.username_or_email)).getText().toString();
-        String password = ((EditText) findViewById(R.id.password)).getText().toString();
+        final String username = ((EditText) findViewById(R.id.username_or_email)).getText().toString();
+        final String password = ((EditText) findViewById(R.id.password)).getText().toString();
 
-        SignInStatus signInStatus = new LoginService(taigaUrl).doLogin(username, password);
+        final ProgressDialog progressDialog = ProgressDialog.show(this, getString(R.string.title_activity_login), getString(R.string.performing_login), true, false);
 
-        if (signInStatus != SignInStatus.OK) {
-            Toast.makeText(getApplicationContext(), getString(signInStatus.getToastMessage()), Toast.LENGTH_SHORT).show();
-            return;
-        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                final SignInStatus signInStatus = new LoginService(taigaUrl).doLogin(username, password);
 
-        Intent intent = new Intent(this, ProjectsActivity.class);
-        startActivity(intent);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressDialog.dismiss();
+                    }
+                });
+
+                if (signInStatus == SignInStatus.OK) {
+                    Intent intent = new Intent(LoginActivity.this, ProjectsActivity.class);
+                    startActivity(intent);
+                } else {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), signInStatus.getToastMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        }).start();
     }
 }

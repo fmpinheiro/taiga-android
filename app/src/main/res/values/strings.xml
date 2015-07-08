@@ -15,4 +15,5 @@
     <string name="title_activity_projects">ProjectsActivity</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="performing_login">Performing login</string>
 </resources>
